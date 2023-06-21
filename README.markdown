@@ -9,9 +9,27 @@ assigned to the button for UIControlStateNormal is non-transparent.
 How to Install
 --------------
 
-### Installation via CocoaPods
+If possible, you should install `OBShapedButton` via [Swift Package Manager](https://www.swift.org/package-manager/) or [CocoaPods](http://cocoapods.org)
 
-If possible, you should install `OBShapedButton` via [CocoaPods](http://cocoapods.org):
+### Installation via Swift Package Manager
+
+    let package = Package(
+      ...
+      dependencies: [
+        .package(url: "https://github.com/volvogroup-mobility/OBShapedButton")
+      ],
+      targets: [
+        .target(
+          ...
+          dependencies: [
+            .product(name: "OBShapedButton", package: "OBShapedButton")
+          ],
+          ...
+        ),
+      ]
+    )
+
+### Installation via CocoaPods
 
     $ edit Podfile
     platform :ios
