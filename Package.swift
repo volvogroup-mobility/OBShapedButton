@@ -18,7 +18,6 @@ let package = Package(
                 sources: [
                     "OBShapedButton",
                     "UIImage+ColorAtPixel"],
-                publicHeadersPath: "include",
                 cSettings: [
                     .headerSearchPath("OBShapedButton"),
                     .headerSearchPath("UIImage+ColorAtPixel"),
