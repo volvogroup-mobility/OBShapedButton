@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.source   = { :git => 'https://github.com/ole/OBShapedButton.git', :tag => '1.2.0' }
   s.description = 'Instances of OBShapedButton respond to touches only in areas where the image that is assigned to the button for UIControlStateNormal is non-transparent.'
   s.platform = :ios
+  s.ios.deployment_target = '12.0'
   s.source_files = 'OBShapedButton/**/*.{h,m}', 'UIImage+ColorAtPixel/**/*.{h,m}'
   s.requires_arc = true
 end
