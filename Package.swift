@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "OBShapedButton",
     defaultLocalization: "en",
-    platforms: [.iOS(.v12)],
+    platforms: [.iOS(.v11)],
     products: [
         .library(name: "OBShapedButton", targets: ["OBShapedButton"])
     ],
