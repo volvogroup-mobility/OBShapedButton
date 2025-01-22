@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'OBShapedButton'
-  s.version  = '1.3.0-abvolvo.1'
+  s.version  = '1.3.0-abvolvo.2'
   s.license  = 'MIT'
   s.summary  = 'A UIButton subclass that works with non-rectangular button shapes.'
   s.homepage = 'https://github.com/volvogroup-mobility'

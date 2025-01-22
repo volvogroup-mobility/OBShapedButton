@@ -122,16 +122,16 @@
 
 #pragma mark - Hit testing
 
-- (BOOL)isAlphaVisibleAtPoint:(CGPoint)point forImage:(UIImage *)image
+- (BOOL)isAlphaVisibleAtPoint:(CGPoint)point forImage:(UIImageView *)imgView
 {
     // Correction for image scaling including contentmode
-    point.x = point.x - self.imageView.frame.origin.x;
-    point.y = point.y - self.imageView.frame.origin.y;
-    CGPoint pt = CGPointApplyAffineTransform(point, self.imageView.viewToImageTransform);
+    point.x = point.x - imgView.frame.origin.x;
+    point.y = point.y - imgView.frame.origin.y;
+    CGPoint pt = CGPointApplyAffineTransform(point, imgView.viewToImageTransform);
     point = pt;
     
 
-    UIColor *pixelColor = [image colorAtPixel:point];
+    UIColor *pixelColor = [imgView.image colorAtPixel:point];
     CGFloat alpha = 0.0;
     
     if ([pixelColor respondsToSelector:@selector(getRed:green:blue:alpha:)])
@@ -175,17 +175,24 @@
     if (self.buttonImage == nil && self.buttonBackground == nil) {
         response = YES;
     }
-    else if (self.buttonImage != nil && self.buttonBackground == nil) {
-        response = [self isAlphaVisibleAtPoint:point forImage:self.buttonImage];
-    }
-    else if (self.buttonImage == nil && self.buttonBackground != nil) {
-        response = [self isAlphaVisibleAtPoint:point forImage:self.buttonBackground];
-    }
-    else {
-        if ([self isAlphaVisibleAtPoint:point forImage:self.buttonImage]) {
-            response = YES;
-        } else {
-            response = [self isAlphaVisibleAtPoint:point forImage:self.buttonBackground];
+    else if (self.imageView.image && [self isAlphaVisibleAtPoint:point forImage:self.imageView]) {
+        response = YES;
+    } else if (self.buttonBackground) {
+        UIImageView *backgroundImageView = [
+            self.subviews filteredArrayUsingPredicate: [
+                NSPredicate predicateWithBlock:^BOOL(id object, NSDictionary __unused *bindings) {
+                    if ([object isKindOfClass:[UIImageView class]]) {
+                        UIImageView* imageView = (UIImageView*)object;
+                        return imageView.image == self.buttonBackground;
+                    } else {
+                        return false;
+                    }
+                }
+            ]
+        ].firstObject;
+
+        if (backgroundImageView) {
+            response = [self isAlphaVisibleAtPoint:point forImage:backgroundImageView];
         }
     }
     
